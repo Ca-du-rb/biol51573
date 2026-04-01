@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
+# This script can be redirected to a file to be used recurrently
 import argparse
 
 parser = argparse.ArgumentParser(description="This script generates a slurm script template")
 
 # add a walltime argument 
 parser.add_argument("walltime", help="Job walltime for the slurm script")
-parser.add_argument("job_name", help="Name assigned to the job to be run")
-#walltime = 1
-#job_name = 'big-analysis'
 
-# parse (pick apart and interpret) the arguments
+# name the job 
+parser.add_argument("job_name", help="Name assigned to the job to be run")
+
+# parse the arguments
 args = parser.parse_args()
 
 print("#!/bin/bash")
