@@ -48,7 +48,6 @@ def main():
     print_output(fibnum)
 
 
-
 ###-------- calling get_args happens out here on its own
 beyonce = get_args() # arguments passed by args are always global, but here we assigned that output to beyonce
 

@@ -23,7 +23,7 @@ def read_fasta(fasta_file):
       # join list elements into a single string
       genome_sequence = ''.join(genome_sequence)
       
-      return(genome_sequence)
+  return(genome_sequence)
 
 
 # function to read and parse covid_genes.gff3
@@ -50,6 +50,6 @@ def read_gff(gff_file, genSeq):
 # function to write the outputs to the covFile
 def write_output(covGene, seqDict):
   with open(covGene, "w") as cov_file:
-    # iterate through the dictionary
+    # iterate through the dictionary and write to output file
     for ID, SEQ in seqDict.items():
-      f.write(f">{ID}\n{SEQ}")
+      cov_file.write(f">{ID}\n{SEQ}\n")

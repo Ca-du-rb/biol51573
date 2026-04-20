@@ -4,7 +4,7 @@
 import argparse
 
 # Module with the functions to read the COVID gene sequences
-import gff_functions
+from gff_functions import read_fasta, read_gff, write_output
 
 ## ----- function to parse command-line arguments:
 def get_args():
@@ -30,13 +30,14 @@ def main():
   covid_file = "../data/covid_genome/covid_genes.fasta"
   
   # reading full genome sequence and storing it in genomeSEQ
-  genomeSEQ = read_fasta(files[0])
+  genomeSEQ = read_fasta(files.FASTA_name)
   
   # reading gff file (to get IDs and their respective sub-sequences)
-  covidGFF = read_gff(files[1], genomesSEQ)
+  covidGFF = read_gff(files.GFF_name, genomeSEQ)
   
   # writing output to covid_file
   write_output(covid_file, covidGFF)
+
 
 #------- obtaining file paths with get_args
 files = get_args()
