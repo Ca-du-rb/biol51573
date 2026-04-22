@@ -2,6 +2,9 @@
 
 from collections import defaultdict
 
+# Could've used the CSV module
+# import csv
+
 # function to open and read the fasta file
 def read_fasta(fasta_file):
   # covid_fasta is the file handle
@@ -23,7 +26,7 @@ def read_fasta(fasta_file):
       # join list elements into a single string
       genome_sequence = ''.join(genome_sequence)
       
-  return(genome_sequence)
+  return genome_sequence
 
 
 # function to read and parse covid_genes.gff3
@@ -39,10 +42,13 @@ def read_gff(gff_file, genSeq):
       
       # getting coordinates for genome sequence extraction and its ID
       # convert coordinates to integers
-      crdBegin = int(line[3])
+      crdBegin = int(line[3]) - 1
       crdEnd = int(line[4])
       seqID = line[8].replace("ID=","")
-      seqs[seqID] = genSeq[crdBegin:(crdEnd+1)]
+
+      # the GFF file considers a system starting with 1
+      # unlike Python where the start is 0
+      seqs[seqID] = genSeq[crdBegin:crdEnd]
       
   return seqs
 
@@ -53,3 +59,9 @@ def write_output(covGene, seqDict):
     # iterate through the dictionary and write to output file
     for ID, SEQ in seqDict.items():
       cov_file.write(f">{ID}\n{SEQ}\n")
+
+# This file won't be run independently,
+# but it's good to have this if statement
+# anyway
+if __name__ == '__main__':
+    main()
