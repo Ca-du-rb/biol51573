@@ -41,13 +41,15 @@ def read_gff(gff_file, genSeq):
       line = line.replace(';', ' ').split()
       
       # getting coordinates for genome sequence extraction and its ID
-      # convert coordinates to integers
+      # convert coordinates to integers (they are strings in the file)
       crdBegin = int(line[3]) - 1
       crdEnd = int(line[4])
       seqID = line[8].replace("ID=","")
 
       # the GFF file considers a system starting with 1
       # unlike Python where the start is 0
+      # Also, the end coordinate of the list is not included in Python
+      # So the number in the GFF file is perfect as an end coordinate
       seqs[seqID] = genSeq[crdBegin:crdEnd]
       
   return seqs
